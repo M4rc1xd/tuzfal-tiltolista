@@ -1,5 +1,5 @@
 export class felvetelDto {
-    priority: number;
+    priority: string;
     mac: string
-    enabled: boolean;
+    enabled: string;
 }

@@ -20,7 +20,8 @@ export class AppController {
   async getFelvetelForm() {
   }
 
-  @Post("ujblocked")
+  @Post("felvetel")
+  @Render('felvetel')
   async ujBlocked(@Body() body: felvetelDto) {
     await this.appService.ujBlocked(body);
   }
