@@ -21,17 +21,15 @@ export class AppService {
   }
 
   async ujBlocked(felvetel: felvetelDto){
-    const macRegex = /^([0-9a-f]{2}:){5}[0-9a-f]{2}$/mi;
-    const priorityRegex = /^[0-9]+$/;
-    const enabledRegex = /^[01]$/;
-    let enabledValue = felvetel.enabled === "1" ? 1 : 0;
-    if (!macRegex.test(felvetel.mac) || !priorityRegex.test(felvetel.priority) || !enabledRegex.test(enabledValue.toString())) {
+    const macRegex = /^([0-9a-f]{2}:){5}[0-9a-f]{2}$/i;
+    let enabled:boolean = felvetel.enabled === 'on';
+    if (!macRegex.test(felvetel.mac) || isNaN(Number(felvetel.priority))) {
       console.log("Valami nem jo");
       return;
     }
-    
+    //00:1A:2B:3C:4D:5E
     const [results] = await mysqlConnection.execute
-    ('INSERT INTO blocklist (priority, mac, enabled) VALUES (?, ?, ?)', [felvetel.priority, felvetel.mac, enabledValue]);
+    ('INSERT INTO blocklist (priority, mac, enabled) VALUES (?, ?, ?)', [felvetel.priority, felvetel.mac, enabled]);
     console.log(results);
   }
 }
