@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        Blocked addressses
+    </title>
+    <!-- <link rel="stylesheet" href="/style.css"> -->
+</head>
+<body>
+    <table>
+        <tr>
+            <th>Priority</th>
+            <th>MAC</th>
+            <th>Enabled</th>
+        </tr>
+        <% list.forEach((item) => { %>
+            <tr <% if (item.enabled == 0 ) { %> style="color: lightgray; font-style: italic" <% } %>>
+                <td class="priority"><%= item.priority %></td>
+                <td class="mac"><%= item.mac %></td>
+                <td class="enabled"><%= item.enabled %></td>
+            </tr>
+            <% }) %>
+        </table>
+</body>
+</html>
